@@ -3,7 +3,7 @@
 
 # provider-pagerduty-api
 
-Kubeform CRDs for [Terraform Pagerduty Provider](https://github.com/pagerduty/terraform-provider-pagerduty)
+Kubeform CRDs for [Terraform PagerDuty Provider](https://github.com/PagerDuty/terraform-provider-pagerduty)
 
 ## Installation
 
