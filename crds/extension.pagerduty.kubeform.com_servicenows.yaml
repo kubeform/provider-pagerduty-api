@@ -73,6 +73,8 @@ spec:
                     type: string
                   snowUser:
                     type: string
+                  summary:
+                    type: string
                   syncOptions:
                     type: string
                   target:
@@ -116,6 +118,8 @@ spec:
                   referer:
                     type: string
                   snowUser:
+                    type: string
+                  summary:
                     type: string
                   syncOptions:
                     type: string

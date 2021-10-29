@@ -59,15 +59,7 @@ spec:
                 properties:
                   contactMethod:
                     additionalProperties:
-                      properties:
-                        ID:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - ID
-                      - type
-                      type: object
+                      type: string
                     type: object
                   id:
                     type: string
@@ -88,15 +80,7 @@ spec:
                 properties:
                   contactMethod:
                     additionalProperties:
-                      properties:
-                        ID:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - ID
-                      - type
-                      type: object
+                      type: string
                     type: object
                   id:
                     type: string

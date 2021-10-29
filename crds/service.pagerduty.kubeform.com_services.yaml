@@ -62,6 +62,7 @@ spec:
                   alertCreation:
                     type: string
                   alertGrouping:
+                    description: Deprecated
                     type: string
                   alertGroupingParameters:
                     properties:
@@ -81,8 +82,8 @@ spec:
                         type: string
                     type: object
                   alertGroupingTimeout:
-                    format: int64
-                    type: integer
+                    description: Deprecated
+                    type: string
                   autoResolveTimeout:
                     type: string
                   createdAt:
@@ -170,6 +171,7 @@ spec:
                   alertCreation:
                     type: string
                   alertGrouping:
+                    description: Deprecated
                     type: string
                   alertGroupingParameters:
                     properties:
@@ -189,8 +191,8 @@ spec:
                         type: string
                     type: object
                   alertGroupingTimeout:
-                    format: int64
-                    type: integer
+                    description: Deprecated
+                    type: string
                   autoResolveTimeout:
                     type: string
                   createdAt:

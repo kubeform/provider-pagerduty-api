@@ -31,6 +31,8 @@ import (
 	rulesetv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/ruleset/v1alpha1"
 	schedulev1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/schedule/v1alpha1"
 	servicev1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/service/v1alpha1"
+	slackv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/slack/v1alpha1"
+	tagv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/tag/v1alpha1"
 	teamv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/team/v1alpha1"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/user/v1alpha1"
 
@@ -51,6 +53,8 @@ type Interface interface {
 	RulesetV1alpha1() rulesetv1alpha1.RulesetV1alpha1Interface
 	ScheduleV1alpha1() schedulev1alpha1.ScheduleV1alpha1Interface
 	ServiceV1alpha1() servicev1alpha1.ServiceV1alpha1Interface
+	SlackV1alpha1() slackv1alpha1.SlackV1alpha1Interface
+	TagV1alpha1() tagv1alpha1.TagV1alpha1Interface
 	TeamV1alpha1() teamv1alpha1.TeamV1alpha1Interface
 	UserV1alpha1() userv1alpha1.UserV1alpha1Interface
 }
@@ -69,6 +73,8 @@ type Clientset struct {
 	rulesetV1alpha1     *rulesetv1alpha1.RulesetV1alpha1Client
 	scheduleV1alpha1    *schedulev1alpha1.ScheduleV1alpha1Client
 	serviceV1alpha1     *servicev1alpha1.ServiceV1alpha1Client
+	slackV1alpha1       *slackv1alpha1.SlackV1alpha1Client
+	tagV1alpha1         *tagv1alpha1.TagV1alpha1Client
 	teamV1alpha1        *teamv1alpha1.TeamV1alpha1Client
 	userV1alpha1        *userv1alpha1.UserV1alpha1Client
 }
@@ -121,6 +127,16 @@ func (c *Clientset) ScheduleV1alpha1() schedulev1alpha1.ScheduleV1alpha1Interfac
 // ServiceV1alpha1 retrieves the ServiceV1alpha1Client
 func (c *Clientset) ServiceV1alpha1() servicev1alpha1.ServiceV1alpha1Interface {
 	return c.serviceV1alpha1
+}
+
+// SlackV1alpha1 retrieves the SlackV1alpha1Client
+func (c *Clientset) SlackV1alpha1() slackv1alpha1.SlackV1alpha1Interface {
+	return c.slackV1alpha1
+}
+
+// TagV1alpha1 retrieves the TagV1alpha1Client
+func (c *Clientset) TagV1alpha1() tagv1alpha1.TagV1alpha1Interface {
+	return c.tagV1alpha1
 }
 
 // TeamV1alpha1 retrieves the TeamV1alpha1Client
@@ -194,6 +210,14 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.slackV1alpha1, err = slackv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
+	cs.tagV1alpha1, err = tagv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 	cs.teamV1alpha1, err = teamv1alpha1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -224,6 +248,8 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	cs.rulesetV1alpha1 = rulesetv1alpha1.NewForConfigOrDie(c)
 	cs.scheduleV1alpha1 = schedulev1alpha1.NewForConfigOrDie(c)
 	cs.serviceV1alpha1 = servicev1alpha1.NewForConfigOrDie(c)
+	cs.slackV1alpha1 = slackv1alpha1.NewForConfigOrDie(c)
+	cs.tagV1alpha1 = tagv1alpha1.NewForConfigOrDie(c)
 	cs.teamV1alpha1 = teamv1alpha1.NewForConfigOrDie(c)
 	cs.userV1alpha1 = userv1alpha1.NewForConfigOrDie(c)
 
@@ -244,6 +270,8 @@ func New(c rest.Interface) *Clientset {
 	cs.rulesetV1alpha1 = rulesetv1alpha1.New(c)
 	cs.scheduleV1alpha1 = schedulev1alpha1.New(c)
 	cs.serviceV1alpha1 = servicev1alpha1.New(c)
+	cs.slackV1alpha1 = slackv1alpha1.New(c)
+	cs.tagV1alpha1 = tagv1alpha1.New(c)
 	cs.teamV1alpha1 = teamv1alpha1.New(c)
 	cs.userV1alpha1 = userv1alpha1.New(c)
 

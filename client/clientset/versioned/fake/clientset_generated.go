@@ -40,6 +40,10 @@ import (
 	fakeschedulev1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/schedule/v1alpha1/fake"
 	servicev1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/service/v1alpha1"
 	fakeservicev1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/service/v1alpha1/fake"
+	slackv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/slack/v1alpha1"
+	fakeslackv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/slack/v1alpha1/fake"
+	tagv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/tag/v1alpha1"
+	faketagv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/tag/v1alpha1/fake"
 	teamv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/team/v1alpha1"
 	faketeamv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/team/v1alpha1/fake"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/user/v1alpha1"
@@ -147,6 +151,16 @@ func (c *Clientset) ScheduleV1alpha1() schedulev1alpha1.ScheduleV1alpha1Interfac
 // ServiceV1alpha1 retrieves the ServiceV1alpha1Client
 func (c *Clientset) ServiceV1alpha1() servicev1alpha1.ServiceV1alpha1Interface {
 	return &fakeservicev1alpha1.FakeServiceV1alpha1{Fake: &c.Fake}
+}
+
+// SlackV1alpha1 retrieves the SlackV1alpha1Client
+func (c *Clientset) SlackV1alpha1() slackv1alpha1.SlackV1alpha1Interface {
+	return &fakeslackv1alpha1.FakeSlackV1alpha1{Fake: &c.Fake}
+}
+
+// TagV1alpha1 retrieves the TagV1alpha1Client
+func (c *Clientset) TagV1alpha1() tagv1alpha1.TagV1alpha1Interface {
+	return &faketagv1alpha1.FakeTagV1alpha1{Fake: &c.Fake}
 }
 
 // TeamV1alpha1 retrieves the TeamV1alpha1Client
