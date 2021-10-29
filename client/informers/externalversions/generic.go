@@ -31,6 +31,8 @@ import (
 	rulesetv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/ruleset/v1alpha1"
 	schedulev1alpha1 "kubeform.dev/provider-pagerduty-api/apis/schedule/v1alpha1"
 	servicev1alpha1 "kubeform.dev/provider-pagerduty-api/apis/service/v1alpha1"
+	slackv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/slack/v1alpha1"
+	tagv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/tag/v1alpha1"
 	teamv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/team/v1alpha1"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/user/v1alpha1"
 
@@ -113,6 +115,16 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Service().V1alpha1().Integrations().Informer()}, nil
 	case servicev1alpha1.SchemeGroupVersion.WithResource("services"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Service().V1alpha1().Services().Informer()}, nil
+
+		// Group=slack.pagerduty.kubeform.com, Version=v1alpha1
+	case slackv1alpha1.SchemeGroupVersion.WithResource("connections"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Slack().V1alpha1().Connections().Informer()}, nil
+
+		// Group=tag.pagerduty.kubeform.com, Version=v1alpha1
+	case tagv1alpha1.SchemeGroupVersion.WithResource("assignments"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Tag().V1alpha1().Assignments().Informer()}, nil
+	case tagv1alpha1.SchemeGroupVersion.WithResource("tags"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Tag().V1alpha1().Tags().Informer()}, nil
 
 		// Group=team.pagerduty.kubeform.com, Version=v1alpha1
 	case teamv1alpha1.SchemeGroupVersion.WithResource("memberships"):

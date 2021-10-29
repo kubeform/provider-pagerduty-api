@@ -58,39 +58,37 @@ spec:
               resource:
                 properties:
                   dependency:
-                    items:
-                      properties:
-                        dependentService:
-                          items:
-                            properties:
-                              ID:
-                                type: string
-                              type:
-                                type: string
-                            required:
-                            - ID
-                            - type
-                            type: object
-                          type: array
-                        supportingService:
-                          items:
-                            properties:
-                              ID:
-                                type: string
-                              type:
-                                type: string
-                            required:
-                            - ID
-                            - type
-                            type: object
-                          type: array
-                        type:
-                          type: string
-                      required:
-                      - dependentService
-                      - supportingService
-                      type: object
-                    type: array
+                    properties:
+                      dependentService:
+                        items:
+                          properties:
+                            ID:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - ID
+                          - type
+                          type: object
+                        type: array
+                      supportingService:
+                        items:
+                          properties:
+                            ID:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - ID
+                          - type
+                          type: object
+                        type: array
+                      type:
+                        type: string
+                    required:
+                    - dependentService
+                    - supportingService
+                    type: object
                   id:
                     type: string
                 required:
@@ -99,39 +97,37 @@ spec:
               state:
                 properties:
                   dependency:
-                    items:
-                      properties:
-                        dependentService:
-                          items:
-                            properties:
-                              ID:
-                                type: string
-                              type:
-                                type: string
-                            required:
-                            - ID
-                            - type
-                            type: object
-                          type: array
-                        supportingService:
-                          items:
-                            properties:
-                              ID:
-                                type: string
-                              type:
-                                type: string
-                            required:
-                            - ID
-                            - type
-                            type: object
-                          type: array
-                        type:
-                          type: string
-                      required:
-                      - dependentService
-                      - supportingService
-                      type: object
-                    type: array
+                    properties:
+                      dependentService:
+                        items:
+                          properties:
+                            ID:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - ID
+                          - type
+                          type: object
+                        type: array
+                      supportingService:
+                        items:
+                          properties:
+                            ID:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - ID
+                          - type
+                          type: object
+                        type: array
+                      type:
+                        type: string
+                    required:
+                    - dependentService
+                    - supportingService
+                    type: object
                   id:
                     type: string
                 required:

@@ -112,6 +112,10 @@ spec:
                     type: string
                   overflow:
                     type: boolean
+                  teams:
+                    items:
+                      type: string
+                    type: array
                   timeZone:
                     type: string
                 required:
@@ -175,6 +179,10 @@ spec:
                     type: string
                   overflow:
                     type: boolean
+                  teams:
+                    items:
+                      type: string
+                    type: array
                   timeZone:
                     type: string
                 required:

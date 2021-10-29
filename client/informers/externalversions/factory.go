@@ -35,6 +35,8 @@ import (
 	ruleset "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/ruleset"
 	schedule "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/schedule"
 	service "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/service"
+	slack "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/slack"
+	tag "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/tag"
 	team "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/team"
 	user "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/user"
 
@@ -194,6 +196,8 @@ type SharedInformerFactory interface {
 	Ruleset() ruleset.Interface
 	Schedule() schedule.Interface
 	Service() service.Interface
+	Slack() slack.Interface
+	Tag() tag.Interface
 	Team() team.Interface
 	User() user.Interface
 }
@@ -236,6 +240,14 @@ func (f *sharedInformerFactory) Schedule() schedule.Interface {
 
 func (f *sharedInformerFactory) Service() service.Interface {
 	return service.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Slack() slack.Interface {
+	return slack.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Tag() tag.Interface {
+	return tag.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Team() team.Interface {
