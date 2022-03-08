@@ -35,6 +35,7 @@ import (
 	tagv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/tag/v1alpha1"
 	teamv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/team/v1alpha1"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/user/v1alpha1"
+	webhookv1alpha1 "kubeform.dev/provider-pagerduty-api/apis/webhook/v1alpha1"
 
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
@@ -73,6 +74,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=business.pagerduty.kubeform.com, Version=v1alpha1
 	case businessv1alpha1.SchemeGroupVersion.WithResource("services"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Business().V1alpha1().Services().Informer()}, nil
+	case businessv1alpha1.SchemeGroupVersion.WithResource("servicesubscribers"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Business().V1alpha1().ServiceSubscribers().Informer()}, nil
 
 		// Group=escalation.pagerduty.kubeform.com, Version=v1alpha1
 	case escalationv1alpha1.SchemeGroupVersion.WithResource("policies"):
@@ -139,6 +142,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.User().V1alpha1().NotificationRules().Informer()}, nil
 	case userv1alpha1.SchemeGroupVersion.WithResource("users"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.User().V1alpha1().Users().Informer()}, nil
+
+		// Group=webhook.pagerduty.kubeform.com, Version=v1alpha1
+	case webhookv1alpha1.SchemeGroupVersion.WithResource("subscriptions"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Webhook().V1alpha1().Subscriptions().Informer()}, nil
 
 	}
 

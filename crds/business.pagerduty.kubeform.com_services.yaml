@@ -74,6 +74,7 @@ spec:
                   team:
                     type: string
                   type:
+                    description: Deprecated
                     type: string
                 required:
                 - name
@@ -97,6 +98,7 @@ spec:
                   team:
                     type: string
                   type:
+                    description: Deprecated
                     type: string
                 required:
                 - name

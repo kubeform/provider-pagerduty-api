@@ -26,6 +26,8 @@ import (
 type Interface interface {
 	// Services returns a ServiceInformer.
 	Services() ServiceInformer
+	// ServiceSubscribers returns a ServiceSubscriberInformer.
+	ServiceSubscribers() ServiceSubscriberInformer
 }
 
 type version struct {
@@ -42,4 +44,9 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 // Services returns a ServiceInformer.
 func (v *version) Services() ServiceInformer {
 	return &serviceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// ServiceSubscribers returns a ServiceSubscriberInformer.
+func (v *version) ServiceSubscribers() ServiceSubscriberInformer {
+	return &serviceSubscriberInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

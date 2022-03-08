@@ -28,6 +28,7 @@ import (
 type BusinessV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	ServicesGetter
+	ServiceSubscribersGetter
 }
 
 // BusinessV1alpha1Client is used to interact with features provided by the business.pagerduty.kubeform.com group.
@@ -37,6 +38,10 @@ type BusinessV1alpha1Client struct {
 
 func (c *BusinessV1alpha1Client) Services(namespace string) ServiceInterface {
 	return newServices(c, namespace)
+}
+
+func (c *BusinessV1alpha1Client) ServiceSubscribers(namespace string) ServiceSubscriberInterface {
+	return newServiceSubscribers(c, namespace)
 }
 
 // NewForConfig creates a new BusinessV1alpha1Client for the given config.

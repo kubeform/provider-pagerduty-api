@@ -35,6 +35,7 @@ import (
 	tagv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/tag/v1alpha1"
 	teamv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/team/v1alpha1"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/user/v1alpha1"
+	webhookv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/webhook/v1alpha1"
 
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
@@ -57,6 +58,7 @@ type Interface interface {
 	TagV1alpha1() tagv1alpha1.TagV1alpha1Interface
 	TeamV1alpha1() teamv1alpha1.TeamV1alpha1Interface
 	UserV1alpha1() userv1alpha1.UserV1alpha1Interface
+	WebhookV1alpha1() webhookv1alpha1.WebhookV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -77,6 +79,7 @@ type Clientset struct {
 	tagV1alpha1         *tagv1alpha1.TagV1alpha1Client
 	teamV1alpha1        *teamv1alpha1.TeamV1alpha1Client
 	userV1alpha1        *userv1alpha1.UserV1alpha1Client
+	webhookV1alpha1     *webhookv1alpha1.WebhookV1alpha1Client
 }
 
 // AddonV1alpha1 retrieves the AddonV1alpha1Client
@@ -147,6 +150,11 @@ func (c *Clientset) TeamV1alpha1() teamv1alpha1.TeamV1alpha1Interface {
 // UserV1alpha1 retrieves the UserV1alpha1Client
 func (c *Clientset) UserV1alpha1() userv1alpha1.UserV1alpha1Interface {
 	return c.userV1alpha1
+}
+
+// WebhookV1alpha1 retrieves the WebhookV1alpha1Client
+func (c *Clientset) WebhookV1alpha1() webhookv1alpha1.WebhookV1alpha1Interface {
+	return c.webhookV1alpha1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -226,6 +234,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.webhookV1alpha1, err = webhookv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -252,6 +264,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	cs.tagV1alpha1 = tagv1alpha1.NewForConfigOrDie(c)
 	cs.teamV1alpha1 = teamv1alpha1.NewForConfigOrDie(c)
 	cs.userV1alpha1 = userv1alpha1.NewForConfigOrDie(c)
+	cs.webhookV1alpha1 = webhookv1alpha1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -274,6 +287,7 @@ func New(c rest.Interface) *Clientset {
 	cs.tagV1alpha1 = tagv1alpha1.New(c)
 	cs.teamV1alpha1 = teamv1alpha1.New(c)
 	cs.userV1alpha1 = userv1alpha1.New(c)
+	cs.webhookV1alpha1 = webhookv1alpha1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

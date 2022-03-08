@@ -160,6 +160,8 @@ spec:
                       type:
                         type: string
                     type: object
+                  type:
+                    type: string
                 required:
                 - escalationPolicy
                 - name
@@ -269,6 +271,8 @@ spec:
                       type:
                         type: string
                     type: object
+                  type:
+                    type: string
                 required:
                 - escalationPolicy
                 - name
