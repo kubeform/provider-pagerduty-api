@@ -48,6 +48,8 @@ import (
 	faketeamv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/team/v1alpha1/fake"
 	userv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/user/v1alpha1"
 	fakeuserv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/user/v1alpha1/fake"
+	webhookv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/webhook/v1alpha1"
+	fakewebhookv1alpha1 "kubeform.dev/provider-pagerduty-api/client/clientset/versioned/typed/webhook/v1alpha1/fake"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -171,4 +173,9 @@ func (c *Clientset) TeamV1alpha1() teamv1alpha1.TeamV1alpha1Interface {
 // UserV1alpha1 retrieves the UserV1alpha1Client
 func (c *Clientset) UserV1alpha1() userv1alpha1.UserV1alpha1Interface {
 	return &fakeuserv1alpha1.FakeUserV1alpha1{Fake: &c.Fake}
+}
+
+// WebhookV1alpha1 retrieves the WebhookV1alpha1Client
+func (c *Clientset) WebhookV1alpha1() webhookv1alpha1.WebhookV1alpha1Interface {
+	return &fakewebhookv1alpha1.FakeWebhookV1alpha1{Fake: &c.Fake}
 }

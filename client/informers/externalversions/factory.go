@@ -39,6 +39,7 @@ import (
 	tag "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/tag"
 	team "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/team"
 	user "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/user"
+	webhook "kubeform.dev/provider-pagerduty-api/client/informers/externalversions/webhook"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -200,6 +201,7 @@ type SharedInformerFactory interface {
 	Tag() tag.Interface
 	Team() team.Interface
 	User() user.Interface
+	Webhook() webhook.Interface
 }
 
 func (f *sharedInformerFactory) Addon() addon.Interface {
@@ -256,4 +258,8 @@ func (f *sharedInformerFactory) Team() team.Interface {
 
 func (f *sharedInformerFactory) User() user.Interface {
 	return user.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Webhook() webhook.Interface {
+	return webhook.New(f, f.namespace, f.tweakListOptions)
 }
